@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from '@tanstack/react-router';
 
 const UserDetailPage = () => {
-    const { userId } = useParams({ from: '/user/$userId' });
+    const { userId } = useParams({ from: '/_auth/user/$userId' });
 
     const {
         data: user,

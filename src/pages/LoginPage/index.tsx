@@ -5,9 +5,11 @@ import { Label } from '@/components/ui/label';
 import { useLogin } from '@/hooks/auth/useLogin';
 import CenterLayout from '@/layouts/CenterLayout';
 import { type LoginDataRequest } from '@/types/AuthType';
+import { useNavigate } from '@tanstack/react-router';
 import { useState, type FormEvent } from 'react';
 
 const LoginPage = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState<LoginDataRequest>({
         email: '',
         password: '',
@@ -21,6 +23,7 @@ const LoginPage = () => {
         mutate(formData, {
             onSuccess: () => {
                 localStorage.setItem('IS_LOGIN', JSON.stringify(true));
+                navigate({ to: '/' });
             },
         });
     };
