@@ -54,6 +54,9 @@ const HomePage = () => {
                     <Button onClick={handleDemo}>Demo</Button>
                     <Button onClick={handleAdmin}>Admin</Button>
                     <Button onClick={handleEmployee}>Employee</Button>
+                    <Button asChild>
+                        <Link to="/user">User List</Link>
+                    </Button>
                 </div>
             </div>
         </CenterLayout>
