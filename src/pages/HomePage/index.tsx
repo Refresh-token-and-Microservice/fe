@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { useAdmin } from '@/hooks/auth/useAdmin';
-import { useDemo } from '@/hooks/auth/useDemo';
-import { useEmployee } from '@/hooks/auth/useEmployee';
+import { useAdmin } from '@/hooks/test/useAdmin';
+import { useDemo } from '@/hooks/test/useDemo';
+import { useEmployee } from '@/hooks/test/useEmployee';
 import { useLogout } from '@/hooks/auth/useLogout';
 import CenterLayout from '@/layouts/CenterLayout';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '@tanstack/react-router';
 
 const HomePage = () => {
     const { mutate: mutateLogout } = useLogout();

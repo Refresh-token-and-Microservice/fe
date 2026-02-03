@@ -1,6 +1,6 @@
 import { authService } from '@/services/AuthService';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@tanstack/react-router';
 
 export const useLogout = () => {
     const navigate = useNavigate();
@@ -9,7 +9,7 @@ export const useLogout = () => {
         mutationFn: () => authService.logout(),
 
         onSuccess: () => {
-            navigate('/login');
+            navigate({ to: '/login' });
             localStorage.removeItem('IS_LOGIN');
         },
 

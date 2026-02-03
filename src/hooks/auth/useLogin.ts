@@ -2,7 +2,7 @@ import { authService } from '@/services/AuthService';
 import type { LoginDataRequest } from '@/types/AuthType';
 import { TanstackQueryKey } from '@/utils/constant';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@tanstack/react-router';
 
 export const useLogin = () => {
     const queryClient = useQueryClient();
@@ -16,7 +16,7 @@ export const useLogin = () => {
                 queryKey: [TanstackQueryKey.LOGIN],
             });
 
-            navigate('/');
+            navigate({ to: '/login' });
         },
 
         onError: (error: Error) => {
