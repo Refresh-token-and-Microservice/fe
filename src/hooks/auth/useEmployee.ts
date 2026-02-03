@@ -1,12 +1,12 @@
 import { demoService } from '@/services/DemoService';
 import { useMutation } from '@tanstack/react-query';
 
-export const useDemo = () => {
+export const useEmployee = () => {
     const { mutate, isPending } = useMutation({
-        mutationFn: () => demoService.demo(),
+        mutationFn: () => demoService.employee(),
 
         onSuccess: () => {
-            alert('Demo');
+            alert('Employee');
         },
 
         onError: (error: Error) => {

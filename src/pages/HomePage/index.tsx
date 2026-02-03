@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button';
+import { useAdmin } from '@/hooks/auth/useAdmin';
 import { useDemo } from '@/hooks/auth/useDemo';
+import { useEmployee } from '@/hooks/auth/useEmployee';
 import { useLogout } from '@/hooks/auth/useLogout';
 import CenterLayout from '@/layouts/CenterLayout';
 import { useState } from 'react';
@@ -8,6 +10,8 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
     const { mutate: mutateLogout } = useLogout();
     const { mutate: mutateDemo } = useDemo();
+    const { mutate: mutateAdmin } = useAdmin();
+    const { mutate: mutateEmployee } = useEmployee();
 
     const [isLoggedIn] = useState<boolean>(() => {
         return JSON.parse(localStorage.getItem('IS_LOGIN') || 'false');
@@ -19,6 +23,14 @@ const HomePage = () => {
 
     const handleDemo = () => {
         mutateDemo();
+    };
+
+    const handleAdmin = () => {
+        mutateAdmin();
+    };
+
+    const handleEmployee = () => {
+        mutateEmployee();
     };
 
     return (
@@ -40,6 +52,8 @@ const HomePage = () => {
 
                     <Button onClick={handleLogout}>Logout</Button>
                     <Button onClick={handleDemo}>Demo</Button>
+                    <Button onClick={handleAdmin}>Admin</Button>
+                    <Button onClick={handleEmployee}>Employee</Button>
                 </div>
             </div>
         </CenterLayout>
