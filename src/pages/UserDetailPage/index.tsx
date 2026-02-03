@@ -1,6 +1,5 @@
 import { useParams } from '@tanstack/react-router';
-import { useQuery } from '@tanstack/react-query';
-import { userService } from '@/services/UserService';
+import { useUser } from '@/hooks/user/useUser';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import CenterLayout from '@/layouts/CenterLayout';
 import { Button } from '@/components/ui/button';
@@ -9,33 +8,7 @@ import { Link } from '@tanstack/react-router';
 const UserDetailPage = () => {
     const { userId } = useParams({ from: '/_auth/user/$userId' });
 
-    const {
-        data: user,
-        isLoading,
-        error,
-    } = useQuery({
-        queryKey: ['user', userId],
-        queryFn: () => userService.getUserById(userId),
-    });
-
-    if (isLoading)
-        return (
-            <CenterLayout>
-                <div>Loading user details...</div>
-            </CenterLayout>
-        );
-    if (error)
-        return (
-            <CenterLayout>
-                <div>Error loading user details</div>
-            </CenterLayout>
-        );
-    if (!user)
-        return (
-            <CenterLayout>
-                <div>User not found</div>
-            </CenterLayout>
-        );
+    const { user } = useUser(userId);
 
     return (
         <CenterLayout>

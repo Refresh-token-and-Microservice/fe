@@ -1,31 +1,10 @@
 import { Link } from '@tanstack/react-router';
-import { useQuery } from '@tanstack/react-query';
-import { userService } from '@/services/UserService';
+import { useUsers } from '@/hooks/user/useUsers';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import CenterLayout from '@/layouts/CenterLayout';
 
 const UserPage = () => {
-    const {
-        data: users,
-        isLoading,
-        error,
-    } = useQuery({
-        queryKey: ['users'],
-        queryFn: userService.getUsers,
-    });
-
-    if (isLoading)
-        return (
-            <CenterLayout>
-                <div>Loading users...</div>
-            </CenterLayout>
-        );
-    if (error)
-        return (
-            <CenterLayout>
-                <div>Error loading users</div>
-            </CenterLayout>
-        );
+    const { users } = useUsers();
 
     return (
         <CenterLayout>
