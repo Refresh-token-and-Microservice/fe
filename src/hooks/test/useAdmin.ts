@@ -2,7 +2,7 @@ import { demoService } from '@/services/DemoService';
 import { useMutation } from '@tanstack/react-query';
 
 export const useAdmin = () => {
-    const { mutate, isPending } = useMutation({
+    const { mutate: mutateAdmin, ...rest } = useMutation({
         mutationFn: () => demoService.admin(),
 
         onSuccess: () => {
@@ -14,5 +14,5 @@ export const useAdmin = () => {
         },
     });
 
-    return { mutate, isPending };
+    return { mutateAdmin, ...rest };
 };

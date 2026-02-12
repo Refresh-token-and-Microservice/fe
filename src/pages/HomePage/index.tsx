@@ -1,10 +1,16 @@
 import { Button } from '@/components/ui/button';
 import { useLogout } from '@/hooks/auth/useLogout';
+import { useAdmin } from '@/hooks/test/useAdmin';
+import { useDemo } from '@/hooks/test/useDemo';
+import { useEmployee } from '@/hooks/test/useEmployee';
 import CenterLayout from '@/layouts/CenterLayout';
 import { Link } from '@tanstack/react-router';
 
 const HomePage = () => {
     const { mutate: mutateLogout } = useLogout();
+    const { mutateAdmin } = useAdmin();
+    const { mutateDemo } = useDemo();
+    const { mutateEmployee } = useEmployee();
 
     const handleLogout = () => {
         mutateLogout();
@@ -16,6 +22,9 @@ const HomePage = () => {
                 <h1 className="text-2xl font-bold">Home page</h1>
                 <div className="flex gap-2">
                     <Button onClick={handleLogout}>Logout</Button>
+                    <Button onClick={() => mutateDemo()}>Demo</Button>
+                    <Button onClick={() => mutateAdmin()}>Admin</Button>
+                    <Button onClick={() => mutateEmployee()}>Employee</Button>
                     <Button asChild variant="outline">
                         <Link to="/user">User List</Link>
                     </Button>
