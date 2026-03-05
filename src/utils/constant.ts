@@ -4,3 +4,7 @@ export const TanstackQueryKey = {
 };
 
 export const LOGOUT_EVENT_NAME = 'app:logout';
+
+export const ItemTypes = {
+    EVENT: 'event',
+};

@@ -13,8 +13,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as AuthIndexRouteImport } from './routes/_auth/index'
-import { Route as AuthUserIndexRouteImport } from './routes/_auth/user/index'
-import { Route as AuthUserUserIdRouteImport } from './routes/_auth/user/$userId'
+import { Route as AuthCalendarIndexRouteImport } from './routes/_auth/calendar/index'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -35,14 +34,9 @@ const AuthIndexRoute = AuthIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthRouteRoute,
 } as any)
-const AuthUserIndexRoute = AuthUserIndexRouteImport.update({
-  id: '/user/',
-  path: '/user/',
-  getParentRoute: () => AuthRouteRoute,
-} as any)
-const AuthUserUserIdRoute = AuthUserUserIdRouteImport.update({
-  id: '/user/$userId',
-  path: '/user/$userId',
+const AuthCalendarIndexRoute = AuthCalendarIndexRouteImport.update({
+  id: '/calendar/',
+  path: '/calendar/',
   getParentRoute: () => AuthRouteRoute,
 } as any)
 
@@ -50,15 +44,13 @@ export interface FileRoutesByFullPath {
   '/': typeof AuthIndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
-  '/user/$userId': typeof AuthUserUserIdRoute
-  '/user/': typeof AuthUserIndexRoute
+  '/calendar/': typeof AuthCalendarIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/': typeof AuthIndexRoute
-  '/user/$userId': typeof AuthUserUserIdRoute
-  '/user': typeof AuthUserIndexRoute
+  '/calendar': typeof AuthCalendarIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -66,22 +58,20 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_auth/': typeof AuthIndexRoute
-  '/_auth/user/$userId': typeof AuthUserUserIdRoute
-  '/_auth/user/': typeof AuthUserIndexRoute
+  '/_auth/calendar/': typeof AuthCalendarIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register' | '/user/$userId' | '/user/'
+  fullPaths: '/' | '/login' | '/register' | '/calendar/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/register' | '/' | '/user/$userId' | '/user'
+  to: '/login' | '/register' | '/' | '/calendar'
   id:
     | '__root__'
     | '/_auth'
     | '/login'
     | '/register'
     | '/_auth/'
-    | '/_auth/user/$userId'
-    | '/_auth/user/'
+    | '/_auth/calendar/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -120,18 +110,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
-    '/_auth/user/': {
-      id: '/_auth/user/'
-      path: '/user'
-      fullPath: '/user/'
-      preLoaderRoute: typeof AuthUserIndexRouteImport
-      parentRoute: typeof AuthRouteRoute
-    }
-    '/_auth/user/$userId': {
-      id: '/_auth/user/$userId'
-      path: '/user/$userId'
-      fullPath: '/user/$userId'
-      preLoaderRoute: typeof AuthUserUserIdRouteImport
+    '/_auth/calendar/': {
+      id: '/_auth/calendar/'
+      path: '/calendar'
+      fullPath: '/calendar/'
+      preLoaderRoute: typeof AuthCalendarIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
   }
@@ -139,14 +122,12 @@ declare module '@tanstack/react-router' {
 
 interface AuthRouteRouteChildren {
   AuthIndexRoute: typeof AuthIndexRoute
-  AuthUserUserIdRoute: typeof AuthUserUserIdRoute
-  AuthUserIndexRoute: typeof AuthUserIndexRoute
+  AuthCalendarIndexRoute: typeof AuthCalendarIndexRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
-  AuthUserUserIdRoute: AuthUserUserIdRoute,
-  AuthUserIndexRoute: AuthUserIndexRoute,
+  AuthCalendarIndexRoute: AuthCalendarIndexRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(

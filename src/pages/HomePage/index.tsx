@@ -4,7 +4,6 @@ import { useAdmin } from '@/hooks/test/useAdmin';
 import { useDemo } from '@/hooks/test/useDemo';
 import { useEmployee } from '@/hooks/test/useEmployee';
 import CenterLayout from '@/layouts/CenterLayout';
-import { Link } from '@tanstack/react-router';
 
 const HomePage = () => {
     const { mutate: mutateLogout } = useLogout();
@@ -25,9 +24,6 @@ const HomePage = () => {
                     <Button onClick={() => mutateDemo()}>Demo</Button>
                     <Button onClick={() => mutateAdmin()}>Admin</Button>
                     <Button onClick={() => mutateEmployee()}>Employee</Button>
-                    <Button asChild variant="outline">
-                        <Link to="/user">User List</Link>
-                    </Button>
                 </div>
             </div>
         </CenterLayout>
