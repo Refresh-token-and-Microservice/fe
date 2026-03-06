@@ -1,29 +1,30 @@
-/* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext } from 'react';
 
 import type { Dispatch, SetStateAction } from 'react';
-import type { IEvent, IUser } from '@/components/calendar/interfaces';
-import type { TBadgeVariant, TVisibleHours, TWorkingHours } from '@/components/calendar/types';
+import type { Event, User } from '@/interfaces/calendarInterfaces';
+import type { BadgeVariant, CalendarView, VisibleHours, WorkingHours } from '@/types/calendarEnums';
 
 interface ICalendarContext {
+    selectedView: CalendarView;
+    setSelectedView: (view: CalendarView) => void;
     selectedDate: Date;
     setSelectedDate: (date: Date | undefined) => void;
-    selectedUserId: IUser['id'] | 'all';
-    setSelectedUserId: (userId: IUser['id'] | 'all') => void;
-    badgeVariant: TBadgeVariant;
-    setBadgeVariant: (variant: TBadgeVariant) => void;
-    users: IUser[];
-    workingHours: TWorkingHours;
-    setWorkingHours: Dispatch<SetStateAction<TWorkingHours>>;
-    visibleHours: TVisibleHours;
-    setVisibleHours: Dispatch<SetStateAction<TVisibleHours>>;
-    events: IEvent[];
-    setLocalEvents: Dispatch<SetStateAction<IEvent[]>>;
+    selectedUserId: User['id'] | 'all';
+    setSelectedUserId: (userId: User['id'] | 'all') => void;
+    badgeVariant: BadgeVariant;
+    setBadgeVariant: (variant: BadgeVariant) => void;
+    users: User[];
+    workingHours: WorkingHours;
+    seWorkingHours: Dispatch<SetStateAction<WorkingHours>>;
+    visibleHours: VisibleHours;
+    seVisibleHours: Dispatch<SetStateAction<VisibleHours>>;
+    events: Event[];
+    setLocalEvents: Dispatch<SetStateAction<Event[]>>;
 }
 
-const CalendarContext = createContext({} as ICalendarContext);
+export const CalendarContext = createContext({} as ICalendarContext);
 
-const WORKING_HOURS = {
+export const WORKING_HOURS = {
     0: { from: 0, to: 0 },
     1: { from: 8, to: 17 },
     2: { from: 8, to: 17 },
@@ -33,50 +34,7 @@ const WORKING_HOURS = {
     6: { from: 8, to: 12 },
 };
 
-const VISIBLE_HOURS = { from: 7, to: 18 };
-
-export function CalendarProvider({ children, users, events }: { children: React.ReactNode; users: IUser[]; events: IEvent[] }) {
-    const [badgeVariant, setBadgeVariant] = useState<TBadgeVariant>('colored');
-    const [visibleHours, setVisibleHours] = useState<TVisibleHours>(VISIBLE_HOURS);
-    const [workingHours, setWorkingHours] = useState<TWorkingHours>(WORKING_HOURS);
-
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedUserId, setSelectedUserId] = useState<IUser['id'] | 'all'>('all');
-
-    // This localEvents doesn't need to exists in a real scenario.
-    // It's used here just to simulate the update of the events.
-    // In a real scenario, the events would be updated in the backend
-    // and the request that fetches the events should be refetched
-    const [localEvents, setLocalEvents] = useState<IEvent[]>(events);
-
-    const handleSelectDate = (date: Date | undefined) => {
-        if (!date) return;
-        setSelectedDate(date);
-    };
-
-    return (
-        <CalendarContext.Provider
-            value={{
-                selectedDate,
-                setSelectedDate: handleSelectDate,
-                selectedUserId,
-                setSelectedUserId,
-                badgeVariant,
-                setBadgeVariant,
-                users,
-                visibleHours,
-                setVisibleHours,
-                workingHours,
-                setWorkingHours,
-                // If you go to the refetch approach, you can remove the localEvents and pass the events directly
-                events: localEvents,
-                setLocalEvents,
-            }}
-        >
-            {children}
-        </CalendarContext.Provider>
-    );
-}
+export const VISIBLE_HOURS = { from: 7, to: 18 };
 
 export function useCalendar(): ICalendarContext {
     const context = useContext(CalendarContext);

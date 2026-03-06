@@ -2,11 +2,11 @@ import { parseISO, isWithinInterval, differenceInDays, startOfDay, endOfDay } fr
 
 import { MonthEventBadge } from '@/components/calendar/components/MonthView/MonthEventBadge';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
     selectedDate: Date;
-    multiDayEvents: IEvent[];
+    multiDayEvents: Event[];
 }
 
 export function DayViewMultiDayEventsRow({ selectedDate, multiDayEvents }: IProps) {

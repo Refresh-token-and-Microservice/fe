@@ -1,5 +1,5 @@
 import { authService } from '@/services/AuthService';
-import type { LoginDataRequest } from '@/types/AuthType';
+import type { LoginDataRequest } from '@/types/authType';
 import { TanstackQueryKey } from '@/utils/constant';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';

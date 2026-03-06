@@ -1,9 +1,9 @@
 import { useDragLayer } from 'react-dnd';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IDragItem {
-    event: IEvent;
+    event: Event;
     children: React.ReactNode;
     width: number;
     height: number;

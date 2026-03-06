@@ -7,11 +7,11 @@ import { useCalendar } from '@/contexts/CalendarContext';
 
 import { YearViewDayCell } from '@/components/calendar/components/YearView/YearViewDayCell';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
     month: Date;
-    events: IEvent[];
+    events: Event[];
 }
 
 export function YearViewMonth({ month, events }: IProps) {

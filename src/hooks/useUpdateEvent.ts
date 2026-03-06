@@ -1,14 +1,14 @@
 import { useCalendar } from '@/contexts/CalendarContext';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 export function useUpdateEvent() {
     const { setLocalEvents } = useCalendar();
 
     // This is just and example, in a real scenario
     // you would call an API to update the event
-    const updateEvent = (event: IEvent) => {
-        const newEvent: IEvent = event;
+    const updateEvent = (event: Event) => {
+        const newEvent: Event = event;
 
         newEvent.startDate = new Date(event.startDate).toISOString();
         newEvent.endDate = new Date(event.endDate).toISOString();

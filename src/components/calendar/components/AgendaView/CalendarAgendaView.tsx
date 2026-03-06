@@ -7,18 +7,18 @@ import { useCalendar } from '@/contexts/CalendarContext';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { AgendaDayGroup } from '@/components/calendar/components/AgendaView/AgendaDayGroup';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
-    singleDayEvents: IEvent[];
-    multiDayEvents: IEvent[];
+    singleDayEvents: Event[];
+    multiDayEvents: Event[];
 }
 
 export function CalendarAgendaView({ singleDayEvents, multiDayEvents }: IProps) {
     const { selectedDate } = useCalendar();
 
     const eventsByDay = useMemo(() => {
-        const allDates = new Map<string, { date: Date; events: IEvent[]; multiDayEvents: IEvent[] }>();
+        const allDates = new Map<string, { date: Date; events: Event[]; multiDayEvents: Event[] }>();
 
         singleDayEvents.forEach((event) => {
             const eventDate = parseISO(event.startDate);

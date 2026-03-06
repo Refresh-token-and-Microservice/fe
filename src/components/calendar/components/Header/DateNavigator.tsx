@@ -7,14 +7,14 @@ import { useCalendar } from '@/contexts/CalendarContext';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
-import { getEventsCount, navigateDate, rangeText } from '@/components/calendar/helpers';
+import { getEventsCount, navigateDate, rangeText } from '@/utils/calendarHelpers';
 
-import type { IEvent } from '@/components/calendar/interfaces';
-import type { TCalendarView } from '@/components/calendar/types';
+import type { Event } from '@/interfaces/calendarInterfaces';
+import type { CalendarView } from '@/types/calendarEnums';
 
 interface IProps {
-    view: TCalendarView;
-    events: IEvent[];
+    view: CalendarView;
+    events: Event[];
 }
 
 export function DateNavigator({ view, events }: IProps) {

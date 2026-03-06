@@ -26,12 +26,12 @@ import {
     isWithinInterval,
 } from 'date-fns';
 
-import type { ICalendarCell, IEvent } from '@/components/calendar/interfaces';
-import type { TCalendarView, TVisibleHours, TWorkingHours } from '@/components/calendar/types';
+import type { CalendarCell, Event } from '@/interfaces/calendarInterfaces';
+import type { CalendarView, VisibleHours, WorkingHours } from '@/types/calendarEnums';
 
 // ================ Header helper functions ================ //
 
-export function rangeText(view: TCalendarView, date: Date) {
+export function rangeText(view: CalendarView, date: Date) {
     const formatString = 'MMM d, yyyy';
     let start: Date;
     let end: Date;
@@ -53,8 +53,6 @@ export function rangeText(view: TCalendarView, date: Date) {
             start = startOfWeek(date);
             end = endOfWeek(date);
             break;
-        case 'day':
-            return format(date, formatString);
         default:
             return 'Error while formatting ';
     }
@@ -62,7 +60,7 @@ export function rangeText(view: TCalendarView, date: Date) {
     return `${format(start, formatString)} - ${format(end, formatString)}`;
 }
 
-export function navigateDate(date: Date, view: TCalendarView, direction: 'previous' | 'next'): Date {
+export function navigateDate(date: Date, view: CalendarView, direction: 'previous' | 'next'): Date {
     const operations = {
         agenda: direction === 'next' ? addMonths : subMonths,
         year: direction === 'next' ? addYears : subYears,
@@ -74,7 +72,7 @@ export function navigateDate(date: Date, view: TCalendarView, direction: 'previo
     return operations[view](date, 1);
 }
 
-export function getEventsCount(events: IEvent[], date: Date, view: TCalendarView): number {
+export function getEventsCount(events: Event[], date: Date, view: CalendarView): number {
     const compareFns = {
         agenda: isSameMonth,
         year: isSameYear,
@@ -88,14 +86,14 @@ export function getEventsCount(events: IEvent[], date: Date, view: TCalendarView
 
 // ================ Week and day view helper functions ================ //
 
-export function getCurrentEvents(events: IEvent[]) {
+export function getCurrentEvents(events: Event[]) {
     const now = new Date();
     return events.filter((event) => isWithinInterval(now, { start: parseISO(event.startDate), end: parseISO(event.endDate) })) || null;
 }
 
-export function groupEvents(dayEvents: IEvent[]) {
+export function groupEvents(dayEvents: Event[]) {
     const sortedEvents = dayEvents.sort((a, b) => parseISO(a.startDate).getTime() - parseISO(b.startDate).getTime());
-    const groups: IEvent[][] = [];
+    const groups: Event[][] = [];
 
     for (const event of sortedEvents) {
         const eventStart = parseISO(event.startDate);
@@ -118,13 +116,7 @@ export function groupEvents(dayEvents: IEvent[]) {
     return groups;
 }
 
-export function getEventBlockStyle(
-    event: IEvent,
-    day: Date,
-    groupIndex: number,
-    groupSize: number,
-    visibleHoursRange?: { from: number; to: number },
-) {
+export function getEventBlockStyle(event: Event, day: Date, groupIndex: number, groupSize: number, visibleHoursRange?: { from: number; to: number }) {
     const startDate = parseISO(event.startDate);
     const dayStart = new Date(day.setHours(0, 0, 0, 0));
     const eventStart = startDate < dayStart ? dayStart : startDate;
@@ -147,13 +139,13 @@ export function getEventBlockStyle(
     return { top: `${top}%`, width: `${width}%`, left: `${left}%` };
 }
 
-export function isWorkingHour(day: Date, hour: number, workingHours: TWorkingHours) {
+export function isWorkingHour(day: Date, hour: number, workingHours: WorkingHours) {
     const dayIndex = day.getDay() as keyof typeof workingHours;
     const dayHours = workingHours[dayIndex];
     return hour >= dayHours.from && hour < dayHours.to;
 }
 
-export function getVisibleHours(visibleHours: TVisibleHours, singleDayEvents: IEvent[]) {
+export function geVisibleHours(visibleHours: VisibleHours, singleDayEvents: Event[]) {
     let earliestEventHour = visibleHours.from;
     let latestEventHour = visibleHours.to;
 
@@ -174,7 +166,7 @@ export function getVisibleHours(visibleHours: TVisibleHours, singleDayEvents: IE
 
 // ================ Month view helper functions ================ //
 
-export function getCalendarCells(selectedDate: Date): ICalendarCell[] {
+export function getCalendarCells(selectedDate: Date): CalendarCell[] {
     const currentYear = selectedDate.getFullYear();
     const currentMonth = selectedDate.getMonth();
 
@@ -207,7 +199,7 @@ export function getCalendarCells(selectedDate: Date): ICalendarCell[] {
     return [...prevMonthCells, ...currentMonthCells, ...nextMonthCells];
 }
 
-export function calculateMonthEventPositions(multiDayEvents: IEvent[], singleDayEvents: IEvent[], selectedDate: Date) {
+export function calculateMonthEventPositions(multiDayEvents: Event[], singleDayEvents: Event[], selectedDate: Date) {
     const monthStart = startOfMonth(selectedDate);
     const monthEnd = endOfMonth(selectedDate);
 
@@ -261,7 +253,7 @@ export function calculateMonthEventPositions(multiDayEvents: IEvent[], singleDay
     return eventPositions;
 }
 
-export function getMonthCellEvents(date: Date, events: IEvent[], eventPositions: Record<string, number>) {
+export function getMonthCellEvents(date: Date, events: Event[], eventPositions: Record<string, number>) {
     const eventsForDate = events.filter((event) => {
         const eventStart = parseISO(event.startDate);
         const eventEnd = parseISO(event.endDate);

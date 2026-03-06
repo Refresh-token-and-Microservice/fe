@@ -4,13 +4,13 @@ import { useCalendar } from '@/contexts/CalendarContext';
 
 import { DayCell } from '@/components/calendar/components/MonthView/DayCell';
 
-import { getCalendarCells, calculateMonthEventPositions } from '@/components/calendar/helpers';
+import { getCalendarCells, calculateMonthEventPositions } from '@/utils/calendarHelpers';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
-    singleDayEvents: IEvent[];
-    multiDayEvents: IEvent[];
+    singleDayEvents: Event[];
+    multiDayEvents: Event[];
 }
 
 const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

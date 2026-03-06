@@ -10,13 +10,13 @@ import { DroppableDayCell } from '@/components/calendar/components/Dnd/Droppable
 import { MonthEventBadge } from '@/components/calendar/components/MonthView/MonthEventBadge';
 
 import { cn } from '@/lib/utils';
-import { getMonthCellEvents } from '@/components/calendar/helpers';
+import { getMonthCellEvents } from '@/utils/calendarHelpers';
 
-import type { ICalendarCell, IEvent } from '@/components/calendar/interfaces';
+import type { CalendarCell, Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
-    cell: ICalendarCell;
-    events: IEvent[];
+    cell: CalendarCell;
+    events: Event[];
     eventPositions: Record<string, number>;
 }
 

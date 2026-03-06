@@ -13,19 +13,19 @@ import { CalendarTimeline } from './CalendarTimeLine';
 import { DayViewMultiDayEventsRow } from '@/components/calendar/components/WeekAndDayView/DayViewMultiDayEventsRow';
 
 import { cn } from '@/lib/utils';
-import { groupEvents, getEventBlockStyle, isWorkingHour, getCurrentEvents, getVisibleHours } from '@/components/calendar/helpers';
+import { groupEvents, getEventBlockStyle, isWorkingHour, getCurrentEvents, geVisibleHours } from '@/utils/calendarHelpers';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
-    singleDayEvents: IEvent[];
-    multiDayEvents: IEvent[];
+    singleDayEvents: Event[];
+    multiDayEvents: Event[];
 }
 
 export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
     const { selectedDate, setSelectedDate, users, visibleHours, workingHours } = useCalendar();
 
-    const { hours, earliestEventHour, latestEventHour } = getVisibleHours(visibleHours, singleDayEvents);
+    const { hours, earliestEventHour, latestEventHour } = geVisibleHours(visibleHours, singleDayEvents);
 
     const currentEvents = getCurrentEvents(singleDayEvents);
 

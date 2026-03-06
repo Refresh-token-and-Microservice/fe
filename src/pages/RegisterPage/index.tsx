@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRegister } from '@/hooks/auth/useRegister';
 import CenterLayout from '@/layouts/CenterLayout';
-import type { RegisterDataRequest } from '@/types/AuthType';
+import type { RegisterDataRequest } from '@/types/authType';
 import { useState, type FormEvent } from 'react';
 
 const RegisterPage = () => {

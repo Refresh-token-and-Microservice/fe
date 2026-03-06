@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button';
 import { EditEventDialog } from '@/components/calendar/components/Dialogs/EditEventDialog';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
-    event: IEvent;
+    event: Event;
     children: React.ReactNode;
 }
 

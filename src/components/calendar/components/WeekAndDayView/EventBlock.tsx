@@ -9,7 +9,7 @@ import { EventDetailsDialog } from '@/components/calendar/components/Dialogs/Eve
 import { cn } from '@/lib/utils';
 
 import type { HTMLAttributes } from 'react';
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 import type { VariantProps } from 'class-variance-authority';
 
 const calendarWeekEventCardVariants = cva(
@@ -43,7 +43,7 @@ const calendarWeekEventCardVariants = cva(
 );
 
 interface IProps extends HTMLAttributes<HTMLDivElement>, Omit<VariantProps<typeof calendarWeekEventCardVariants>, 'color'> {
-    event: IEvent;
+    event: Event;
 }
 
 export function EventBlock({ event, className }: IProps) {

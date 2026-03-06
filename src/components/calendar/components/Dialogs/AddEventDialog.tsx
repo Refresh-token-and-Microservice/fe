@@ -25,10 +25,10 @@ import {
     DialogFooter,
 } from '@/components/ui/dialog';
 
-import { eventSchema } from '@/components/calendar/schemas';
+import { eventSchema } from '@/schemas/eventFormSchemas';
 
 import type { TimeValue } from 'react-aria-components';
-import type { TEventFormData } from '@/components/calendar/schemas';
+import type { TEventFormData } from '@/schemas/eventFormSchemas';
 
 interface IProps {
     children: React.ReactNode;

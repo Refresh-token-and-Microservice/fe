@@ -26,15 +26,15 @@ import {
     DialogFooter,
 } from '@/components/ui/dialog';
 
-import { eventSchema } from '@/components/calendar/schemas';
+import { eventSchema } from '@/schemas/eventFormSchemas';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 import type { TimeValue } from 'react-aria-components';
-import type { TEventFormData } from '@/components/calendar/schemas';
+import type { TEventFormData } from '@/schemas/eventFormSchemas';
 
 interface IProps {
     children: React.ReactNode;
-    event: IEvent;
+    event: Event;
 }
 
 export function EditEventDialog({ children, event }: IProps) {

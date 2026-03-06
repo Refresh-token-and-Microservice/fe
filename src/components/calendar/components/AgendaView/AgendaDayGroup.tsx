@@ -2,12 +2,12 @@ import { differenceInDays, format, parseISO, startOfDay } from 'date-fns';
 
 import { AgendaEventCard } from '@/components/calendar/components/AgendaView/AgendaEventCard';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
     date: Date;
-    events: IEvent[];
-    multiDayEvents: IEvent[];
+    events: Event[];
+    multiDayEvents: Event[];
 }
 
 export function AgendaDayGroup({ date, events, multiDayEvents }: IProps) {

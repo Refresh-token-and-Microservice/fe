@@ -3,11 +3,11 @@ import { parseISO, startOfDay, startOfWeek, endOfWeek, addDays, differenceInDays
 
 import { MonthEventBadge } from '@/components/calendar/components/MonthView/MonthEventBadge';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
     selectedDate: Date;
-    multiDayEvents: IEvent[];
+    multiDayEvents: Event[];
 }
 
 export function WeekViewMultiDayEventsRow({ selectedDate, multiDayEvents }: IProps) {

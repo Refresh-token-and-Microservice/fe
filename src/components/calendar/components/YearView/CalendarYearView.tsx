@@ -5,10 +5,10 @@ import { useCalendar } from '@/contexts/CalendarContext';
 
 import { YearViewMonth } from '@/components/calendar/components/YearView/YearViewMonth';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
-    allEvents: IEvent[];
+    allEvents: Event[];
 }
 
 export function CalendarYearView({ allEvents }: IProps) {

@@ -4,12 +4,12 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 
 import { cn } from '@/lib/utils';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 import { ItemTypes } from '@/utils/constant';
 
 interface DraggableEventProps {
-    event: IEvent;
+    event: Event;
     children: React.ReactNode;
 }
 

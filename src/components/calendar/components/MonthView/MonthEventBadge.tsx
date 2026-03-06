@@ -8,7 +8,7 @@ import { EventDetailsDialog } from '@/components/calendar/components/Dialogs/Eve
 
 import { cn } from '@/lib/utils';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 import type { VariantProps } from 'class-variance-authority';
 
 const eventBadgeVariants = cva(
@@ -48,7 +48,7 @@ const eventBadgeVariants = cva(
 );
 
 interface IProps extends Omit<VariantProps<typeof eventBadgeVariants>, 'color' | 'multiDayPosition'> {
-    event: IEvent;
+    event: Event;
     cellDate: Date;
     eventCurrentDay?: number;
     eventTotalDays?: number;

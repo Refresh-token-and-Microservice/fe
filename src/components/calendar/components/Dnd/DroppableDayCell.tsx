@@ -6,10 +6,10 @@ import { useUpdateEvent } from '@/hooks/useUpdateEvent';
 import { cn } from '@/lib/utils';
 import { ItemTypes } from '@/utils/constant';
 
-import type { IEvent, ICalendarCell } from '@/components/calendar/interfaces';
+import type { Event, CalendarCell } from '@/interfaces/calendarInterfaces';
 
 interface DroppableDayCellProps {
-    cell: ICalendarCell;
+    cell: CalendarCell;
     children: React.ReactNode;
 }
 
@@ -19,7 +19,7 @@ export function DroppableDayCell({ cell, children }: DroppableDayCellProps) {
     const [{ isOver, canDrop }, drop] = useDrop(
         () => ({
             accept: ItemTypes.EVENT,
-            drop: (item: { event: IEvent }) => {
+            drop: (item: { event: Event }) => {
                 const droppedEvent = item.event;
 
                 const eventStartDate = parseISO(droppedEvent.startDate);

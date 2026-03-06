@@ -6,7 +6,7 @@ import { useUpdateEvent } from '@/hooks/useUpdateEvent';
 import { cn } from '@/lib/utils';
 import { ItemTypes } from '@/utils/constant';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface DroppableTimeBlockProps {
     date: Date;
@@ -21,7 +21,7 @@ export function DroppableTimeBlock({ date, hour, minute, children }: DroppableTi
     const [{ isOver, canDrop }, drop] = useDrop(
         () => ({
             accept: ItemTypes.EVENT,
-            drop: (item: { event: IEvent }) => {
+            drop: (item: { event: Event }) => {
                 const droppedEvent = item.event;
 
                 const eventStartDate = parseISO(droppedEvent.startDate);

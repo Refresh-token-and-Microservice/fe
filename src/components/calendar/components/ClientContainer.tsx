@@ -9,13 +9,12 @@ import { CalendarHeader } from '@/components/calendar/components/Header/Calendar
 import { CalendarYearView } from '@/components/calendar/components/YearView/CalendarYearView';
 import { CalendarMonthView } from '@/components/calendar/components/MonthView/CalendarMonthView';
 import { CalendarAgendaView } from '@/components/calendar/components/AgendaView/CalendarAgendaView';
-import { CalendarDayView } from '@/components/calendar/components/WeekAndDayView/CalendarDayView';
 import { CalendarWeekView } from '@/components/calendar/components/WeekAndDayView/CalendarWeekView';
 
-import type { TCalendarView } from '@/components/calendar/types';
+import type { CalendarView } from '@/types/calendarEnums';
 
 interface IProps {
-    view: TCalendarView;
+    view: CalendarView;
 }
 
 export function ClientContainer({ view }: IProps) {
@@ -92,7 +91,6 @@ export function ClientContainer({ view }: IProps) {
             <CalendarHeader view={view} events={filteredEvents} />
 
             <DndProviderWrapper>
-                {view === 'day' && <CalendarDayView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
                 {view === 'month' && <CalendarMonthView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
                 {view === 'week' && <CalendarWeekView singleDayEvents={singleDayEvents} multiDayEvents={multiDayEvents} />}
                 {view === 'year' && <CalendarYearView allEvents={eventStartDates} />}

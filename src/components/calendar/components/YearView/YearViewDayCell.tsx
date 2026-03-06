@@ -6,12 +6,12 @@ import { useCalendar } from '@/contexts/CalendarContext';
 
 import { cn } from '@/lib/utils';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
     day: number;
     date: Date;
-    events: IEvent[];
+    events: Event[];
 }
 
 export function YearViewDayCell({ day, date, events }: IProps) {

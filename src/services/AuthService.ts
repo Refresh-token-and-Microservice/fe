@@ -1,4 +1,4 @@
-import type { LoginDataResponse, LoginDataRequest, RegisterDataRequest, RegisterDataResponse } from '@/types/AuthType';
+import type { LoginDataResponse, LoginDataRequest, RegisterDataRequest, RegisterDataResponse } from '@/types/authType';
 import { apiPost } from '@/utils/apiRequest';
 
 class AuthService {

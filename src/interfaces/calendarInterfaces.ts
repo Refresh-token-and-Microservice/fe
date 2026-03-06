@@ -1,22 +1,22 @@
-import type { TEventColor } from '@/components/calendar/types';
+import type { EventColor } from '@/types/calendarEnums';
 
-export interface IUser {
+export interface User {
     id: string;
     name: string;
     picturePath: string | null;
 }
 
-export interface IEvent {
+export interface Event {
     id: number;
     startDate: string;
     endDate: string;
     title: string;
-    color: TEventColor;
+    color: EventColor;
     description: string;
-    user: IUser;
+    user: User;
 }
 
-export interface ICalendarCell {
+export interface CalendarCell {
     day: number;
     currentMonth: boolean;
     date: Date;

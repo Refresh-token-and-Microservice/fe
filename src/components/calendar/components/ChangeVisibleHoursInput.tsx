@@ -10,14 +10,14 @@ import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/comp
 import type { TimeValue } from 'react-aria-components';
 
 export function ChangeVisibleHoursInput() {
-    const { visibleHours, setVisibleHours } = useCalendar();
+    const { visibleHours, seVisibleHours } = useCalendar();
 
     const [from, setFrom] = useState<{ hour: number; minute: number }>({ hour: visibleHours.from, minute: 0 });
     const [to, setTo] = useState<{ hour: number; minute: number }>({ hour: visibleHours.to, minute: 0 });
 
     const handleApply = () => {
         const toHour = to.hour === 0 ? 24 : to.hour;
-        setVisibleHours({ from: from.hour, to: toHour });
+        seVisibleHours({ from: from.hour, to: toHour });
     };
 
     return (

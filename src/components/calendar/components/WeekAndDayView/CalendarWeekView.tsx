@@ -11,19 +11,19 @@ import { CalendarTimeline } from './CalendarTimeLine';
 import { WeekViewMultiDayEventsRow } from '@/components/calendar/components/WeekAndDayView/WeekViewMultiDayEventsRow';
 
 import { cn } from '@/lib/utils';
-import { groupEvents, getEventBlockStyle, isWorkingHour, getVisibleHours } from '@/components/calendar/helpers';
+import { groupEvents, getEventBlockStyle, isWorkingHour, geVisibleHours } from '@/utils/calendarHelpers';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 
 interface IProps {
-    singleDayEvents: IEvent[];
-    multiDayEvents: IEvent[];
+    singleDayEvents: Event[];
+    multiDayEvents: Event[];
 }
 
 export function CalendarWeekView({ singleDayEvents, multiDayEvents }: IProps) {
     const { selectedDate, workingHours, visibleHours } = useCalendar();
 
-    const { hours, earliestEventHour, latestEventHour } = getVisibleHours(visibleHours, singleDayEvents);
+    const { hours, earliestEventHour, latestEventHour } = geVisibleHours(visibleHours, singleDayEvents);
 
     const weekStart = startOfWeek(selectedDate);
     const weekDays = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));

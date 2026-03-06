@@ -6,7 +6,7 @@ import { useCalendar } from '@/contexts/CalendarContext';
 
 import { EventDetailsDialog } from '@/components/calendar/components/Dialogs/EventDetailsDialog';
 
-import type { IEvent } from '@/components/calendar/interfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 import type { VariantProps } from 'class-variance-authority';
 
 const agendaEventCardVariants = cva(
@@ -40,7 +40,7 @@ const agendaEventCardVariants = cva(
 );
 
 interface IProps {
-    event: IEvent;
+    event: Event;
     eventCurrentDay?: number;
     eventTotalDays?: number;
 }

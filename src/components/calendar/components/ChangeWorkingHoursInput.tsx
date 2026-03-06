@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Info, Moon } from 'lucide-react';
-import type { TWorkingHours } from '@/components/calendar/types';
+import type { WorkingHours } from '@/types/calendarEnums';
 import { useCalendar } from '@/contexts/CalendarContext';
 
 import { Button } from '@/components/ui/button';
@@ -23,9 +23,9 @@ const DAYS_OF_WEEK = [
 ];
 
 export function ChangeWorkingHoursInput() {
-    const { workingHours, setWorkingHours } = useCalendar();
+    const { workingHours, seWorkingHours } = useCalendar();
 
-    const [localWorkingHours, setLocalWorkingHours] = useState<TWorkingHours>({ ...workingHours });
+    const [localWorkingHours, setLocalWorkingHours] = useState<WorkingHours>({ ...workingHours });
 
     const handleToggleDay = (dayId: number) => {
         setLocalWorkingHours((prev) => ({
@@ -62,7 +62,7 @@ export function ChangeWorkingHoursInput() {
             }
         }
 
-        setWorkingHours(updatedWorkingHours);
+        seWorkingHours(updatedWorkingHours);
     };
 
     return (

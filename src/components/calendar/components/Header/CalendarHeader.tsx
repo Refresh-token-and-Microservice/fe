@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from '@tanstack/react-router';
-import { Columns, Grid3x3, List, Plus, Grid2x2, CalendarRange } from 'lucide-react';
+import { Columns, Grid3x3, Plus, Grid2x2, CalendarRange } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
@@ -9,15 +7,19 @@ import { TodayButton } from '@/components/calendar/components/Header/TodayButton
 import { DateNavigator } from '@/components/calendar/components/Header/DateNavigator';
 import { AddEventDialog } from '@/components/calendar/components/Dialogs/AddEventDialog';
 
-import type { IEvent } from '@/components/calendar/interfaces';
-import type { TCalendarView } from '@/components/calendar/types';
+import type { Event } from '@/interfaces/calendarInterfaces';
+import type { CalendarView } from '@/types/calendarEnums';
+import { useCalendar } from '@/contexts/CalendarContext';
+import { CALENDAR_VIEW } from '@/types/calendarEnums';
 
 interface IProps {
-    view: TCalendarView;
-    events: IEvent[];
+    view: CalendarView;
+    events: Event[];
 }
 
 export function CalendarHeader({ view, events }: IProps) {
+    const { setSelectedView } = useCalendar();
+
     return (
         <div className="flex flex-col gap-4 border-b p-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-3">
@@ -30,26 +32,18 @@ export function CalendarHeader({ view, events }: IProps) {
                     <div className="inline-flex first:rounded-r-none last:rounded-l-none [&:not(:first-child):not(:last-child)]:rounded-none">
                         <Button
                             asChild
-                            aria-label="View by day"
-                            size="icon"
-                            variant={view === 'day' ? 'default' : 'outline'}
-                            className="rounded-r-none [&_svg]:size-5"
-                        >
-                            <Link to={'/day-view' as any}>
-                                <List strokeWidth={1.8} />
-                            </Link>
-                        </Button>
-
-                        <Button
-                            asChild
                             aria-label="View by week"
                             size="icon"
                             variant={view === 'week' ? 'default' : 'outline'}
-                            className="-ml-px rounded-none [&_svg]:size-5"
+                            className="rounded-r-none [&_svg]:size-5"
                         >
-                            <Link to={'/week-view' as any}>
+                            <div
+                                onClick={() => {
+                                    setSelectedView(CALENDAR_VIEW.WEEK);
+                                }}
+                            >
                                 <Columns strokeWidth={1.8} />
-                            </Link>
+                            </div>
                         </Button>
 
                         <Button
@@ -59,9 +53,13 @@ export function CalendarHeader({ view, events }: IProps) {
                             variant={view === 'month' ? 'default' : 'outline'}
                             className="-ml-px rounded-none [&_svg]:size-5"
                         >
-                            <Link to={'/month-view' as any}>
+                            <div
+                                onClick={() => {
+                                    setSelectedView(CALENDAR_VIEW.MONTH);
+                                }}
+                            >
                                 <Grid2x2 strokeWidth={1.8} />
-                            </Link>
+                            </div>
                         </Button>
 
                         <Button
@@ -71,9 +69,13 @@ export function CalendarHeader({ view, events }: IProps) {
                             variant={view === 'year' ? 'default' : 'outline'}
                             className="-ml-px rounded-none [&_svg]:size-5"
                         >
-                            <Link to={'/year-view' as any}>
+                            <div
+                                onClick={() => {
+                                    setSelectedView(CALENDAR_VIEW.YEAR);
+                                }}
+                            >
                                 <Grid3x3 strokeWidth={1.8} />
-                            </Link>
+                            </div>
                         </Button>
 
                         <Button
@@ -83,9 +85,13 @@ export function CalendarHeader({ view, events }: IProps) {
                             variant={view === 'agenda' ? 'default' : 'outline'}
                             className="-ml-px rounded-l-none [&_svg]:size-5"
                         >
-                            <Link to={'/agenda-view' as any}>
+                            <div
+                                onClick={() => {
+                                    setSelectedView(CALENDAR_VIEW.LIST);
+                                }}
+                            >
                                 <CalendarRange strokeWidth={1.8} />
-                            </Link>
+                            </div>
                         </Button>
                     </div>
 

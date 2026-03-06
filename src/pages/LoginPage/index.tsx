@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useLogin } from '@/hooks/auth/useLogin';
 import CenterLayout from '@/layouts/CenterLayout';
-import { type LoginDataRequest } from '@/types/AuthType';
+import { type LoginDataRequest } from '@/types/authType';
 import { useNavigate } from '@tanstack/react-router';
 import { useState, type FormEvent } from 'react';
 
