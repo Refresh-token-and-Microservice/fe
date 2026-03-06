@@ -6,7 +6,7 @@ import { useEmployee } from '@/hooks/test/useEmployee';
 import CenterLayout from '@/layouts/CenterLayout';
 
 const HomePage = () => {
-    const { mutate: mutateLogout } = useLogout();
+    const { mutateLogout } = useLogout();
     const { mutateAdmin } = useAdmin();
     const { mutateDemo } = useDemo();
     const { mutateEmployee } = useEmployee();

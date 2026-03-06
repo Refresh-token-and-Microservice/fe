@@ -5,7 +5,7 @@ import { useNavigate } from '@tanstack/react-router';
 export const useLogout = () => {
     const navigate = useNavigate();
 
-    const { mutate, isPending } = useMutation({
+    const { mutate: mutateLogout, isPending } = useMutation({
         mutationFn: () => authService.logout(),
 
         onSuccess: () => {
@@ -18,5 +18,5 @@ export const useLogout = () => {
         },
     });
 
-    return { mutate, isPending };
+    return { mutateLogout, isPending };
 };

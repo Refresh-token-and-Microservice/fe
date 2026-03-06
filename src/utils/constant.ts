@@ -1,6 +1,7 @@
 export const TanstackQueryKey = {
     LOGIN: 'LOGIN',
     REGISTER: 'REGISTER',
+    ME: 'ME',
 };
 
 export const LOGOUT_EVENT_NAME = 'app:logout';

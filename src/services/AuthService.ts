@@ -1,5 +1,6 @@
+import type { UserProfileResponse } from '@/interfaces/userInterfaces';
 import type { LoginDataResponse, LoginDataRequest, RegisterDataRequest, RegisterDataResponse } from '@/types/authType';
-import { apiPost } from '@/utils/apiRequest';
+import { apiGet, apiPost } from '@/utils/apiRequest';
 
 class AuthService {
     async login(loginData: LoginDataRequest): Promise<LoginDataResponse> {
@@ -23,6 +24,12 @@ class AuthService {
 
     async logout(): Promise<string> {
         const { result } = await apiPost<string>('/auth/logout');
+
+        return result;
+    }
+
+    async me(): Promise<UserProfileResponse> {
+        const { result } = await apiGet<UserProfileResponse>('/auth/me');
 
         return result;
     }

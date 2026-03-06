@@ -1,5 +1,5 @@
 import axios, { type AxiosRequestConfig, type AxiosError } from 'axios';
-import { LOGOUT_EVENT_NAME } from '@/utils/constant'; // Import tên sự kiện logout của bạn
+import { LOGOUT_EVENT_NAME } from '@/utils/constant';
 
 export interface CustomAxiosRequestConfig extends AxiosRequestConfig {
     skipAuth?: boolean;
@@ -29,21 +29,16 @@ instance.interceptors.response.use(
     async (error: AxiosError) => {
         const originalRequest = error.config as CustomAxiosRequestConfig;
 
-        // 1. Lỗi là 403 (Forbidden) - Backend bạn trả về khi hết hạn
-        // 2. originalRequest tồn tại
-        // 3. Request này chưa từng được retry (tránh lặp vô hạn)
-        if (error.response?.status === 403 && originalRequest && !originalRequest._retry) {
+        const isUnauthorized = error.response?.status === 401 || error.response?.status === 403;
+
+        if (isUnauthorized && originalRequest && !originalRequest._retry && originalRequest.url !== '/auth/refresh-token') {
             originalRequest._retry = true;
 
             try {
-                // BƯỚC 1: Gọi API Refresh Token
                 await instance.post('/auth/refresh-token');
 
-                // BƯỚC 2: Nếu refresh thành công (không nhảy vào catch)
-                // Gọi lại request ban đầu với config cũ
                 return instance(originalRequest);
             } catch (refreshError) {
-                // BƯỚC 3: Nếu Refresh Token cũng hết hạn hoặc lỗi
                 console.log('Refresh token expired or failed. Logging out...');
 
                 window.dispatchEvent(new CustomEvent(LOGOUT_EVENT_NAME));

@@ -3,8 +3,9 @@ import type { Event, User } from '@/interfaces/calendarInterfaces';
 import type { BadgeVariant, CalendarView, VisibleHours, WorkingHours } from '@/types/calendarEnums';
 import { CalendarContext, VISIBLE_HOURS, WORKING_HOURS } from './CalendarContext';
 import { CALENDAR_VIEW } from '@/types/calendarEnums';
+import { CALENDAR_ITEMS_MOCK, USERS_MOCK } from '@/mocks/calendarMocks';
 
-export function CalendarProvider({ children, users, events }: { children: React.ReactNode; users: User[]; events: Event[] }) {
+export function CalendarProvider({ children }: { children: React.ReactNode }) {
     const [badgeVariant, setBadgeVariant] = useState<BadgeVariant>('colored');
     const [visibleHours, seVisibleHours] = useState<VisibleHours>(VISIBLE_HOURS);
     const [workingHours, seWorkingHours] = useState<WorkingHours>(WORKING_HOURS);
@@ -13,7 +14,7 @@ export function CalendarProvider({ children, users, events }: { children: React.
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedUserId, setSelectedUserId] = useState<User['id'] | 'all'>('all');
 
-    const [localEvents, setLocalEvents] = useState<Event[]>(events);
+    const [localEvents, setLocalEvents] = useState<Event[]>(CALENDAR_ITEMS_MOCK);
 
     const handleSelectDate = (date: Date | undefined) => {
         if (!date) return;
@@ -31,7 +32,7 @@ export function CalendarProvider({ children, users, events }: { children: React.
                 setSelectedUserId,
                 badgeVariant,
                 setBadgeVariant,
-                users,
+                users: USERS_MOCK,
                 visibleHours,
                 seVisibleHours,
                 workingHours,
