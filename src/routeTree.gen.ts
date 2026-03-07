@@ -8,162 +8,145 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as RegisterRouteImport } from './routes/register'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as AuthRouteRouteImport } from './routes/_auth/route'
-import { Route as AuthIndexRouteImport } from './routes/_auth/index'
-import { Route as AuthInfomationProvideIndexRouteImport } from './routes/_auth/infomation-provide/index'
-import { Route as AuthCalendarIndexRouteImport } from './routes/_auth/calendar/index'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as RegisterRouteImport } from './routes/register';
+import { Route as LoginRouteImport } from './routes/login';
+import { Route as AuthRouteRouteImport } from './routes/_auth/route';
+import { Route as AuthIndexRouteImport } from './routes/_auth/index';
+import { Route as AuthInfomationProvideIndexRouteImport } from './routes/_auth/infomation-provide/index';
+import { Route as AuthCalendarIndexRouteImport } from './routes/_auth/calendar/index';
 
 const RegisterRoute = RegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/register',
+    path: '/register',
+    getParentRoute: () => rootRouteImport,
+} as any);
 const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/login',
+    path: '/login',
+    getParentRoute: () => rootRouteImport,
+} as any);
 const AuthRouteRoute = AuthRouteRouteImport.update({
-  id: '/_auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/_auth',
+    getParentRoute: () => rootRouteImport,
+} as any);
 const AuthIndexRoute = AuthIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AuthRouteRoute,
-} as any)
-const AuthInfomationProvideIndexRoute =
-  AuthInfomationProvideIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthRouteRoute,
+} as any);
+const AuthInfomationProvideIndexRoute = AuthInfomationProvideIndexRouteImport.update({
     id: '/infomation-provide/',
     path: '/infomation-provide/',
     getParentRoute: () => AuthRouteRoute,
-  } as any)
+} as any);
 const AuthCalendarIndexRoute = AuthCalendarIndexRouteImport.update({
-  id: '/calendar/',
-  path: '/calendar/',
-  getParentRoute: () => AuthRouteRoute,
-} as any)
+    id: '/calendar/',
+    path: '/calendar/',
+    getParentRoute: () => AuthRouteRoute,
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof AuthIndexRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/calendar/': typeof AuthCalendarIndexRoute
-  '/infomation-provide/': typeof AuthInfomationProvideIndexRoute
+    '/': typeof AuthIndexRoute;
+    '/login': typeof LoginRoute;
+    '/register': typeof RegisterRoute;
+    '/calendar/': typeof AuthCalendarIndexRoute;
+    '/infomation-provide/': typeof AuthInfomationProvideIndexRoute;
 }
 export interface FileRoutesByTo {
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/': typeof AuthIndexRoute
-  '/calendar': typeof AuthCalendarIndexRoute
-  '/infomation-provide': typeof AuthInfomationProvideIndexRoute
+    '/login': typeof LoginRoute;
+    '/register': typeof RegisterRoute;
+    '/': typeof AuthIndexRoute;
+    '/calendar': typeof AuthCalendarIndexRoute;
+    '/infomation-provide': typeof AuthInfomationProvideIndexRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_auth': typeof AuthRouteRouteWithChildren
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/_auth/': typeof AuthIndexRoute
-  '/_auth/calendar/': typeof AuthCalendarIndexRoute
-  '/_auth/infomation-provide/': typeof AuthInfomationProvideIndexRoute
+    __root__: typeof rootRouteImport;
+    '/_auth': typeof AuthRouteRouteWithChildren;
+    '/login': typeof LoginRoute;
+    '/register': typeof RegisterRoute;
+    '/_auth/': typeof AuthIndexRoute;
+    '/_auth/calendar/': typeof AuthCalendarIndexRoute;
+    '/_auth/infomation-provide/': typeof AuthInfomationProvideIndexRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/login'
-    | '/register'
-    | '/calendar/'
-    | '/infomation-provide/'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/register' | '/' | '/calendar' | '/infomation-provide'
-  id:
-    | '__root__'
-    | '/_auth'
-    | '/login'
-    | '/register'
-    | '/_auth/'
-    | '/_auth/calendar/'
-    | '/_auth/infomation-provide/'
-  fileRoutesById: FileRoutesById
+    fileRoutesByFullPath: FileRoutesByFullPath;
+    fullPaths: '/' | '/login' | '/register' | '/calendar/' | '/infomation-provide/';
+    fileRoutesByTo: FileRoutesByTo;
+    to: '/login' | '/register' | '/' | '/calendar' | '/infomation-provide';
+    id: '__root__' | '/_auth' | '/login' | '/register' | '/_auth/' | '/_auth/calendar/' | '/_auth/infomation-provide/';
+    fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  AuthRouteRoute: typeof AuthRouteRouteWithChildren
-  LoginRoute: typeof LoginRoute
-  RegisterRoute: typeof RegisterRoute
+    AuthRouteRoute: typeof AuthRouteRouteWithChildren;
+    LoginRoute: typeof LoginRoute;
+    RegisterRoute: typeof RegisterRoute;
 }
 
 declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
+    interface FileRoutesByPath {
+        '/register': {
+            id: '/register';
+            path: '/register';
+            fullPath: '/register';
+            preLoaderRoute: typeof RegisterRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/login': {
+            id: '/login';
+            path: '/login';
+            fullPath: '/login';
+            preLoaderRoute: typeof LoginRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/_auth': {
+            id: '/_auth';
+            path: '';
+            fullPath: '/';
+            preLoaderRoute: typeof AuthRouteRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/_auth/': {
+            id: '/_auth/';
+            path: '/';
+            fullPath: '/';
+            preLoaderRoute: typeof AuthIndexRouteImport;
+            parentRoute: typeof AuthRouteRoute;
+        };
+        '/_auth/infomation-provide/': {
+            id: '/_auth/infomation-provide/';
+            path: '/infomation-provide';
+            fullPath: '/infomation-provide/';
+            preLoaderRoute: typeof AuthInfomationProvideIndexRouteImport;
+            parentRoute: typeof AuthRouteRoute;
+        };
+        '/_auth/calendar/': {
+            id: '/_auth/calendar/';
+            path: '/calendar';
+            fullPath: '/calendar/';
+            preLoaderRoute: typeof AuthCalendarIndexRouteImport;
+            parentRoute: typeof AuthRouteRoute;
+        };
     }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_auth': {
-      id: '/_auth'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_auth/': {
-      id: '/_auth/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AuthIndexRouteImport
-      parentRoute: typeof AuthRouteRoute
-    }
-    '/_auth/infomation-provide/': {
-      id: '/_auth/infomation-provide/'
-      path: '/infomation-provide'
-      fullPath: '/infomation-provide/'
-      preLoaderRoute: typeof AuthInfomationProvideIndexRouteImport
-      parentRoute: typeof AuthRouteRoute
-    }
-    '/_auth/calendar/': {
-      id: '/_auth/calendar/'
-      path: '/calendar'
-      fullPath: '/calendar/'
-      preLoaderRoute: typeof AuthCalendarIndexRouteImport
-      parentRoute: typeof AuthRouteRoute
-    }
-  }
 }
 
 interface AuthRouteRouteChildren {
-  AuthIndexRoute: typeof AuthIndexRoute
-  AuthCalendarIndexRoute: typeof AuthCalendarIndexRoute
-  AuthInfomationProvideIndexRoute: typeof AuthInfomationProvideIndexRoute
+    AuthIndexRoute: typeof AuthIndexRoute;
+    AuthCalendarIndexRoute: typeof AuthCalendarIndexRoute;
+    AuthInfomationProvideIndexRoute: typeof AuthInfomationProvideIndexRoute;
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
-  AuthIndexRoute: AuthIndexRoute,
-  AuthCalendarIndexRoute: AuthCalendarIndexRoute,
-  AuthInfomationProvideIndexRoute: AuthInfomationProvideIndexRoute,
-}
+    AuthIndexRoute: AuthIndexRoute,
+    AuthCalendarIndexRoute: AuthCalendarIndexRoute,
+    AuthInfomationProvideIndexRoute: AuthInfomationProvideIndexRoute,
+};
 
-const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
-  AuthRouteRouteChildren,
-)
+const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(AuthRouteRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
-  AuthRouteRoute: AuthRouteRouteWithChildren,
-  LoginRoute: LoginRoute,
-  RegisterRoute: RegisterRoute,
-}
-export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+    AuthRouteRoute: AuthRouteRouteWithChildren,
+    LoginRoute: LoginRoute,
+    RegisterRoute: RegisterRoute,
+};
+export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
