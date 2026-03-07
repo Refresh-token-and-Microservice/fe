@@ -113,7 +113,7 @@ export function EditEventDialog({ children, event }: IProps) {
                                     <FormLabel>Responsible</FormLabel>
                                     <FormControl>
                                         <Select
-                                            value={String(field.value)}
+                                            value={field.value ? String(field.value) : undefined}
                                             onValueChange={(val) => {
                                                 field.onChange(Number(val));
                                             }}
