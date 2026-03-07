@@ -25,11 +25,11 @@ const RootLayout = () => {
     const location = useLocation();
 
     useEffect(() => {
-        if (!isInitializing && user?.id) {
+        if (!isInitializing && user.id) {
             const hasMissingInfo = !user.firstName || !user.lastName;
 
             if (hasMissingInfo && location.pathname !== '/infomation-provide') {
-                navigate({ to: '/infomation-provide', replace: true });
+                void navigate({ to: '/infomation-provide', replace: true });
             }
         }
     }, [user, location.pathname, isInitializing, navigate]);
@@ -47,7 +47,7 @@ const RootLayout = () => {
             }
         };
 
-        initApp();
+        void initApp();
     }, [fetchMeAsync, setUser]);
 
     useEffect(() => {

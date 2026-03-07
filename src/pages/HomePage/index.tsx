@@ -21,9 +21,27 @@ const HomePage = () => {
                 <h1 className="text-2xl font-bold">Home page</h1>
                 <div className="flex gap-2">
                     <Button onClick={handleLogout}>Logout</Button>
-                    <Button onClick={() => mutateDemo()}>Demo</Button>
-                    <Button onClick={() => mutateAdmin()}>Admin</Button>
-                    <Button onClick={() => mutateEmployee()}>Employee</Button>
+                    <Button
+                        onClick={() => {
+                            mutateDemo();
+                        }}
+                    >
+                        Demo
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            mutateAdmin();
+                        }}
+                    >
+                        Admin
+                    </Button>
+                    <Button
+                        onClick={() => {
+                            mutateEmployee();
+                        }}
+                    >
+                        Employee
+                    </Button>
                 </div>
             </div>
         </CenterLayout>

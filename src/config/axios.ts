@@ -20,7 +20,7 @@ instance.interceptors.request.use(
         return config;
     },
     (error) => {
-        return Promise.reject(error);
+        return Promise.reject(error as Error);
     },
 );
 
@@ -31,19 +31,19 @@ instance.interceptors.response.use(
 
         const isUnauthorized = error.response?.status === 401 || error.response?.status === 403;
 
-        if (isUnauthorized && originalRequest && !originalRequest._retry && originalRequest.url !== '/auth/refresh-token') {
+        if (isUnauthorized && !originalRequest._retry && originalRequest.url !== '/auth/refresh-token') {
             originalRequest._retry = true;
 
             try {
                 await instance.post('/auth/refresh-token');
 
-                return instance(originalRequest);
+                return await instance(originalRequest);
             } catch (refreshError) {
                 console.log('Refresh token expired or failed. Logging out...');
 
                 window.dispatchEvent(new CustomEvent(LOGOUT_EVENT_NAME));
 
-                return Promise.reject(refreshError);
+                return Promise.reject(refreshError as Error);
             }
         }
 

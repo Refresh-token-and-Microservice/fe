@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, use } from 'react';
 
 import type { UserProfileResponse } from '@/interfaces/userInterfaces';
 
@@ -10,7 +10,6 @@ interface UserContext {
 export const UserContext = createContext({} as UserContext);
 
 export function useUser(): UserContext {
-    const context = useContext(UserContext);
-    if (!context) throw new Error('useUser must be used within a UserProvider.');
+    const context = use(UserContext);
     return context;
 }

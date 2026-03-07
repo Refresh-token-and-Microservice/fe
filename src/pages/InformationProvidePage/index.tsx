@@ -21,21 +21,21 @@ const InformationProvidePage = () => {
     const form = useForm<InfoProvideFormValues>({
         resolver: zodResolver(infoProvideSchema),
         defaultValues: {
-            firstName: user?.firstName || '',
-            lastName: user?.lastName || '',
-            phone: user?.phone || '',
+            firstName: user.firstName || '',
+            lastName: user.lastName || '',
+            phone: user.phone || '',
         },
     });
 
     const onSubmit = (values: InfoProvideFormValues) => {
         console.log(user);
-        if (!user?.id) return;
+        if (!user.id) return;
         mutate(
             { userId: user.id, data: values },
             {
                 onSuccess: (updatedUser) => {
                     setUser(updatedUser);
-                    navigate({ to: '/' });
+                    void navigate({ to: '/' });
                 },
             },
         );
@@ -49,10 +49,16 @@ const InformationProvidePage = () => {
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
-                        <form className="flex w-full flex-col gap-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+                        <form
+                            className="flex w-full flex-col gap-y-4"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                void form.handleSubmit(onSubmit)(e);
+                            }}
+                        >
                             <div className="flex w-full flex-col gap-y-2">
                                 <Label>Email</Label>
-                                <Input type="email" value={user?.email || ''} disabled />
+                                <Input type="email" value={user.email || ''} disabled />
                             </div>
 
                             <FormField

@@ -37,7 +37,7 @@ interface IProps {
 }
 
 export function AddEventDialog({ children, startDate, startTime }: IProps) {
-    const { admins } = useCalendar();
+    const { users } = useCalendar();
 
     const { isOpen, onClose, onToggle } = useDisclosure();
 
@@ -80,7 +80,14 @@ export function AddEventDialog({ children, startDate, startTime }: IProps) {
                 </DialogHeader>
 
                 <Form {...form}>
-                    <form id="event-form" onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 py-4">
+                    <form
+                        id="event-form"
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            void form.handleSubmit(onSubmit)(e);
+                        }}
+                        className="grid gap-4 py-4"
+                    >
                         <FormField
                             control={form.control}
                             name="user"
@@ -89,22 +96,24 @@ export function AddEventDialog({ children, startDate, startTime }: IProps) {
                                     <FormLabel>Responsible</FormLabel>
                                     <FormControl>
                                         <Select
-                                            value={field.value !== undefined ? String(field.value) : undefined}
-                                            onValueChange={(val) => field.onChange(Number(val))}
+                                            value={String(field.value)}
+                                            onValueChange={(val) => {
+                                                field.onChange(Number(val));
+                                            }}
                                         >
                                             <SelectTrigger data-invalid={fieldState.invalid}>
                                                 <SelectValue placeholder="Select an option" />
                                             </SelectTrigger>
 
                                             <SelectContent>
-                                                {admins.map((admin) => (
-                                                    <SelectItem key={admin.id} value={String(admin.id)} className="flex-1">
+                                                {users.map((user) => (
+                                                    <SelectItem key={user.userId} value={String(user.userId)} className="flex-1">
                                                         <div className="flex items-center gap-2">
-                                                            <Avatar key={admin.id} className="size-6">
-                                                                <AvatarFallback className="text-xxs">{admin.firstName?.[0] || 'U'}</AvatarFallback>
+                                                            <Avatar key={user.userId} className="size-6">
+                                                                <AvatarFallback className="text-xxs">{user.firstName[0] || 'U'}</AvatarFallback>
                                                             </Avatar>
 
-                                                            <p className="truncate">{`${admin.firstName || ''} ${admin.lastName || ''}`.trim()}</p>
+                                                            <p className="truncate">{`${user.firstName} ${user.lastName}`.trim()}</p>
                                                         </div>
                                                     </SelectItem>
                                                 ))}
@@ -144,7 +153,9 @@ export function AddEventDialog({ children, startDate, startTime }: IProps) {
                                             <SingleDayPicker
                                                 id="startDate"
                                                 value={field.value}
-                                                onSelect={(date) => field.onChange(date as Date)}
+                                                onSelect={(date) => {
+                                                    if (date) field.onChange(date);
+                                                }}
                                                 placeholder="Select a date"
                                                 data-invalid={fieldState.invalid}
                                             />
@@ -187,7 +198,9 @@ export function AddEventDialog({ children, startDate, startTime }: IProps) {
                                         <FormControl>
                                             <SingleDayPicker
                                                 value={field.value}
-                                                onSelect={(date) => field.onChange(date as Date)}
+                                                onSelect={(date) => {
+                                                    field.onChange(date);
+                                                }}
                                                 placeholder="Select a date"
                                                 data-invalid={fieldState.invalid}
                                             />

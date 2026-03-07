@@ -10,11 +10,14 @@ export interface UserProfileResponse {
     phone: string;
 }
 
-export interface GetAllAdminItem {
-    id: number;
-    email: string;
+export type GetAllAdminItem = UserProfileResponse;
+
+export interface GetAllUserItem {
+    userId: number;
     firstName: string;
     lastName: string;
+    phone: string;
+    email: string;
 }
 
 export interface UpdateUserRequest {

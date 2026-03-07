@@ -88,7 +88,9 @@ export function getEventsCount(events: Event[], date: Date, view: CalendarView):
 
 export function getCurrentEvents(events: Event[]) {
     const now = new Date();
-    return events.filter((event) => isWithinInterval(now, { start: parseISO(event.startDate), end: parseISO(event.endDate) })) || null;
+    return events.filter((event) => {
+        return isWithinInterval(now, { start: parseISO(event.startDate), end: parseISO(event.endDate) });
+    });
 }
 
 export function groupEvents(dayEvents: Event[]) {
@@ -136,11 +138,11 @@ export function getEventBlockStyle(event: Event, day: Date, groupIndex: number, 
     const width = 100 / groupSize;
     const left = groupIndex * width;
 
-    return { top: `${top}%`, width: `${width}%`, left: `${left}%` };
+    return { top: `${top.toString()}%`, width: `${width.toString()}%`, left: `${left.toString()}%` };
 }
 
 export function isWorkingHour(day: Date, hour: number, workingHours: WorkingHours) {
-    const dayIndex = day.getDay() as keyof typeof workingHours;
+    const dayIndex = day.getDay();
     const dayHours = workingHours[dayIndex];
     return hour >= dayHours.from && hour < dayHours.to;
 }
@@ -203,8 +205,8 @@ export function calculateMonthEventPositions(multiDayEvents: Event[], singleDayE
     const monthStart = startOfMonth(selectedDate);
     const monthEnd = endOfMonth(selectedDate);
 
-    const eventPositions: { [key: string]: number } = {};
-    const occupiedPositions: { [key: string]: boolean[] } = {};
+    const eventPositions: Record<string, number> = {};
+    const occupiedPositions: Record<string, boolean[]> = {};
 
     eachDayOfInterval({ start: monthStart, end: monthEnd }).forEach((day) => {
         occupiedPositions[day.toISOString()] = [false, false, false];
@@ -233,7 +235,7 @@ export function calculateMonthEventPositions(multiDayEvents: Event[], singleDayE
             if (
                 eventDays.every((day) => {
                     const dayPositions = occupiedPositions[startOfDay(day).toISOString()];
-                    return dayPositions && !dayPositions[i];
+                    return dayPositions[i];
                 })
             ) {
                 position = i;
@@ -263,7 +265,7 @@ export function getMonthCellEvents(date: Date, events: Event[], eventPositions: 
     return eventsForDate
         .map((event) => ({
             ...event,
-            position: eventPositions[event.id] ?? -1,
+            position: eventPositions[event.id],
             isMultiDay: event.startDate !== event.endDate,
         }))
         .sort((a, b) => {

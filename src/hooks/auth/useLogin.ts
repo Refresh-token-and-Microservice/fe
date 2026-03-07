@@ -24,9 +24,9 @@ export const useLogin = () => {
             setUser(data);
 
             if (!data.firstName || !data.lastName) {
-                navigate({ to: '/infomation-provide' });
+                void navigate({ to: '/infomation-provide' });
             } else {
-                navigate({ to: '/' });
+                void navigate({ to: '/' });
             }
         },
 

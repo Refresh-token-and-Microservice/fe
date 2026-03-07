@@ -72,7 +72,7 @@ export function EventBlock({ event, className }: IProps) {
                     role="button"
                     tabIndex={0}
                     className={calendarWeekEventCardClasses}
-                    style={{ height: `${heightInPixels}px` }}
+                    style={{ height: `${heightInPixels.toString()}px` }}
                     onKeyDown={handleKeyDown}
                 >
                     <div className="flex items-center gap-1.5 truncate">

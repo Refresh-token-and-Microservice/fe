@@ -1,18 +1,26 @@
 import { useDragLayer } from 'react-dnd';
+import type { CSSProperties, ReactNode } from 'react';
 
 import type { Event } from '@/interfaces/calendarInterfaces';
 
-interface IDragItem {
+import { cn } from '@/lib/utils';
+
+interface DragItem {
     event: Event;
-    children: React.ReactNode;
+    children: ReactNode;
     width: number;
     height: number;
 }
 
-export function CustomDragLayer() {
-    const { isDragging, item, currentOffset, initialOffset, initialClientOffset } = useDragLayer((monitor) => ({
-        item: monitor.getItem() as IDragItem | null,
-        itemType: monitor.getItemType(),
+const CustomDragLayer = () => {
+    const { item, isDragging, currentOffset, initialOffset, initialClientOffset } = useDragLayer<{
+        item: unknown;
+        isDragging: boolean;
+        currentOffset: { x: number; y: number } | null;
+        initialOffset: { x: number; y: number } | null;
+        initialClientOffset: { x: number; y: number } | null;
+    }>((monitor) => ({
+        item: monitor.getItem(),
         isDragging: monitor.isDragging(),
         currentOffset: monitor.getClientOffset(),
         initialOffset: monitor.getInitialSourceClientOffset(),
@@ -23,10 +31,12 @@ export function CustomDragLayer() {
         return null;
     }
 
+    const dragItem = item as DragItem;
+
     const offsetX = initialClientOffset.x - initialOffset.x;
     const offsetY = initialClientOffset.y - initialOffset.y;
 
-    const layerStyles: React.CSSProperties = {
+    const layerStyles: CSSProperties = {
         position: 'fixed',
         pointerEvents: 'none',
         zIndex: 100,
@@ -36,15 +46,11 @@ export function CustomDragLayer() {
 
     return (
         <div style={layerStyles}>
-            <div
-                className=""
-                style={{
-                    width: item.width,
-                    height: item.height,
-                }}
-            >
-                {item.children}
+            <div>
+                <div className={cn(`w-[${dragItem.width.toString()}px]`, `h-[${dragItem.height.toString()}px]`)}>{dragItem.children}</div>
             </div>
         </div>
     );
-}
+};
+
+export default CustomDragLayer;

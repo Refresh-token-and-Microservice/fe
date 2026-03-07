@@ -93,7 +93,12 @@ export function ChangeWorkingHoursInput() {
                     return (
                         <div key={day.index} className="flex items-center gap-4">
                             <div className="flex w-40 items-center gap-2">
-                                <Switch checked={isDayActive} onCheckedChange={() => handleToggleDay(day.index)} />
+                                <Switch
+                                    checked={isDayActive}
+                                    onCheckedChange={() => {
+                                        handleToggleDay(day.index);
+                                    }}
+                                />
                                 <span className="text-sm font-medium">{day.name}</span>
                             </div>
 
@@ -106,7 +111,9 @@ export function ChangeWorkingHoursInput() {
                                             hourCycle={12}
                                             granularity="hour"
                                             value={{ hour: localWorkingHours[day.index].from, minute: 0 } as TimeValue}
-                                            onChange={(value) => handleTimeChange(day.index, 'from', value)}
+                                            onChange={(value) => {
+                                                handleTimeChange(day.index, 'from', value);
+                                            }}
                                         />
                                     </div>
 
@@ -117,7 +124,9 @@ export function ChangeWorkingHoursInput() {
                                             hourCycle={12}
                                             granularity="hour"
                                             value={{ hour: localWorkingHours[day.index].to, minute: 0 } as TimeValue}
-                                            onChange={(value) => handleTimeChange(day.index, 'to', value)}
+                                            onChange={(value) => {
+                                                handleTimeChange(day.index, 'to', value);
+                                            }}
                                         />
                                     </div>
                                 </div>

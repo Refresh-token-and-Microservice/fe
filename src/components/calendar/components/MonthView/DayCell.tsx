@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMemo } from 'react';
-import { useNavigate } from '@tanstack/react-router';
 import { isToday, startOfDay } from 'date-fns';
 
 import { useCalendar } from '@/contexts/CalendarContext';
@@ -23,7 +21,6 @@ interface IProps {
 const MAX_VISIBLE_EVENTS = 3;
 
 export function DayCell({ cell, events, eventPositions }: IProps) {
-    const navigate = useNavigate();
     const { setSelectedDate } = useCalendar();
 
     const { day, currentMonth, date } = cell;
@@ -33,7 +30,6 @@ export function DayCell({ cell, events, eventPositions }: IProps) {
 
     const handleClick = () => {
         setSelectedDate(date);
-        navigate({ to: '/day-view' as any });
     };
 
     return (
@@ -53,7 +49,7 @@ export function DayCell({ cell, events, eventPositions }: IProps) {
                 <div className={cn('flex h-6 gap-1 px-2 lg:h-[94px] lg:flex-col lg:gap-2 lg:px-0', !currentMonth && 'opacity-50')}>
                     {[0, 1, 2].map((position) => {
                         const event = cellEvents.find((e) => e.position === position);
-                        const eventKey = event ? `event-${event.id}-${position}` : `empty-${position}`;
+                        const eventKey = event ? `event-${event.id.toString()}-${position.toString()}` : `empty-${position.toString()}`;
 
                         return (
                             <div key={eventKey} className="lg:flex-1">

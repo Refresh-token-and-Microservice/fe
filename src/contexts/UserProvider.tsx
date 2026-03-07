@@ -6,13 +6,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<UserProfileResponse>({} as UserProfileResponse);
 
     return (
-        <UserContext.Provider
+        <UserContext
             value={{
                 user,
                 setUser,
             }}
         >
             {children}
-        </UserContext.Provider>
+        </UserContext>
     );
 }

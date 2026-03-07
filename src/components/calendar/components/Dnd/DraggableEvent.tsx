@@ -19,8 +19,8 @@ export function DraggableEvent({ event, children }: DraggableEventProps) {
     const [{ isDragging }, drag, preview] = useDrag(() => ({
         type: ItemTypes.EVENT,
         item: () => {
-            const width = ref.current?.offsetWidth || 0;
-            const height = ref.current?.offsetHeight || 0;
+            const width = ref.current?.offsetWidth ?? 0;
+            const height = ref.current?.offsetHeight ?? 0;
             return { event, children, width, height };
         },
         collect: (monitor) => ({ isDragging: monitor.isDragging() }),

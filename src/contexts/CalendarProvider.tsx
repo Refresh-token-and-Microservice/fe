@@ -4,18 +4,20 @@ import type { BadgeVariant, CalendarView, VisibleHours, WorkingHours } from '@/t
 import { CalendarContext, VISIBLE_HOURS, WORKING_HOURS } from './CalendarContext';
 import { CALENDAR_VIEW } from '@/types/calendarEnums';
 import { CALENDAR_ITEMS_MOCK } from '@/mocks/calendarMocks';
-import type { GetAllAdminItem } from '@/interfaces/userInterfaces';
+import type { GetAllUserItem } from '@/interfaces/userInterfaces';
 
 export function CalendarProvider({ children }: { children: React.ReactNode }) {
     const [badgeVariant, setBadgeVariant] = useState<BadgeVariant>('colored');
     const [visibleHours, seVisibleHours] = useState<VisibleHours>(VISIBLE_HOURS);
     const [workingHours, seWorkingHours] = useState<WorkingHours>(WORKING_HOURS);
 
-    const [admins, setAdmins] = useState<GetAllAdminItem[]>([]);
+    const [users, setUsers] = useState<GetAllUserItem[]>([]);
 
     const [selectedView, setSelectedView] = useState<CalendarView>(CALENDAR_VIEW.WEEK);
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedUserId, setSelectedUserId] = useState<GetAllAdminItem['id'] | 'all'>('all');
+    const [selectedDate, setSelectedDate] = useState(() => {
+        return new Date();
+    });
+    const [selectedUserId, setSelectedUserId] = useState<GetAllUserItem['userId'] | 'all'>('all');
 
     const [localEvents, setLocalEvents] = useState<Event[]>(CALENDAR_ITEMS_MOCK);
 
@@ -25,7 +27,7 @@ export function CalendarProvider({ children }: { children: React.ReactNode }) {
     };
 
     return (
-        <CalendarContext.Provider
+        <CalendarContext
             value={{
                 selectedView,
                 setSelectedView,
@@ -35,8 +37,8 @@ export function CalendarProvider({ children }: { children: React.ReactNode }) {
                 setSelectedUserId,
                 badgeVariant,
                 setBadgeVariant,
-                admins,
-                setAdmins,
+                users,
+                setUsers,
                 visibleHours,
                 seVisibleHours,
                 workingHours,
@@ -46,6 +48,6 @@ export function CalendarProvider({ children }: { children: React.ReactNode }) {
             }}
         >
             {children}
-        </CalendarContext.Provider>
+        </CalendarContext>
     );
 }

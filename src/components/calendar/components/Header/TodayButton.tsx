@@ -6,7 +6,9 @@ export function TodayButton() {
     const { setSelectedDate } = useCalendar();
 
     const today = new Date();
-    const handleClick = () => setSelectedDate(today);
+    const handleClick = () => {
+        setSelectedDate(today);
+    };
 
     return (
         <button

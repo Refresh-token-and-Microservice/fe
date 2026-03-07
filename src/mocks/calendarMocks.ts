@@ -1,33 +1,37 @@
 import type { EventColor } from '@/types/calendarEnums';
 import type { Event } from '@/interfaces/calendarInterfaces';
-import type { GetAllAdminItem } from '@/interfaces/userInterfaces';
+import type { GetAllUserItem } from '@/interfaces/userInterfaces';
 
 // ================================== //
 
-export const USERS_MOCK: GetAllAdminItem[] = [
+export const USERS_MOCK: GetAllUserItem[] = [
     {
-        id: 1,
+        userId: 1,
         email: 'leonardo@example.com',
         firstName: 'Leonardo',
         lastName: 'Ramos',
+        phone: 'abc',
     },
     {
-        id: 2,
+        userId: 2,
         email: 'michael@example.com',
         firstName: 'Michael',
         lastName: 'Doe',
+        phone: 'abc',
     },
     {
-        id: 3,
+        userId: 3,
         email: 'alice@example.com',
         firstName: 'Alice',
         lastName: 'Johnson',
+        phone: 'abc',
     },
     {
-        id: 4,
+        userId: 4,
         email: 'robert@example.com',
         firstName: 'Robert',
         lastName: 'Smith',
+        phone: 'abc',
     },
 ];
 

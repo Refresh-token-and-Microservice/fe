@@ -8,26 +8,26 @@ import { ChangeWorkingHoursInput } from '@/components/calendar/components/Change
 import { ClientContainer } from '@/components/calendar/components/ClientContainer';
 import { useCalendar } from '@/contexts/CalendarContext';
 import { useEffect } from 'react';
-import { useGetAllAdmin } from '@/hooks/auth/useGetAllAdmin';
+import { useGetAllUser } from '@/hooks/auth/useGetAllUser';
 
 const CalendarPage = () => {
-    const { selectedView, setAdmins } = useCalendar();
+    const { selectedView, setUsers } = useCalendar();
 
-    const { mutateAsync } = useGetAllAdmin();
+    const { mutateAsync } = useGetAllUser();
 
     useEffect(() => {
         const initApp = async () => {
             try {
-                const adminsData = await mutateAsync();
+                const userData = await mutateAsync();
 
-                setAdmins(adminsData);
+                setUsers(userData);
             } catch (error: unknown) {
                 console.log('No valid session. Starting as guest.', error);
             }
         };
 
-        initApp();
-    }, [mutateAsync, setAdmins]);
+        void initApp();
+    }, [mutateAsync, setUsers]);
 
     return (
         <div className="mx-auto flex max-w-screen-2xl flex-col gap-4 px-8 py-4">

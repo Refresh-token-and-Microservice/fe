@@ -1,7 +1,7 @@
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { CustomDragLayer } from '@/components/calendar/components/Dnd/CustomDragLayer';
+import CustomDragLayer from '@/components/calendar/components/Dnd/CustomDragLayer';
 
 interface DndProviderWrapperProps {
     children: React.ReactNode;

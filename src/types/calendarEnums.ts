@@ -27,5 +27,5 @@ export const BADGE_VARIANT = {
 
 export type BadgeVariant = (typeof BADGE_VARIANT)[keyof typeof BADGE_VARIANT];
 
-export type WorkingHours = { [key: number]: { from: number; to: number } };
+export type WorkingHours = Record<number, { from: number; to: number }>;
 export type VisibleHours = { from: number; to: number };

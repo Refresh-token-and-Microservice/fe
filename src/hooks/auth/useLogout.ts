@@ -9,7 +9,7 @@ export const useLogout = () => {
         mutationFn: () => authService.logout(),
 
         onSuccess: () => {
-            navigate({ to: '/login' });
+            void navigate({ to: '/login' });
         },
 
         onError: (error: Error) => {
