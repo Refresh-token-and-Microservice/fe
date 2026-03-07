@@ -13,6 +13,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as AuthIndexRouteImport } from './routes/_auth/index'
+import { Route as AuthInfomationProvideIndexRouteImport } from './routes/_auth/infomation-provide/index'
 import { Route as AuthCalendarIndexRouteImport } from './routes/_auth/calendar/index'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -34,6 +35,12 @@ const AuthIndexRoute = AuthIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthRouteRoute,
 } as any)
+const AuthInfomationProvideIndexRoute =
+  AuthInfomationProvideIndexRouteImport.update({
+    id: '/infomation-provide/',
+    path: '/infomation-provide/',
+    getParentRoute: () => AuthRouteRoute,
+  } as any)
 const AuthCalendarIndexRoute = AuthCalendarIndexRouteImport.update({
   id: '/calendar/',
   path: '/calendar/',
@@ -45,12 +52,14 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/calendar/': typeof AuthCalendarIndexRoute
+  '/infomation-provide/': typeof AuthInfomationProvideIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/': typeof AuthIndexRoute
   '/calendar': typeof AuthCalendarIndexRoute
+  '/infomation-provide': typeof AuthInfomationProvideIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -59,12 +68,18 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/_auth/': typeof AuthIndexRoute
   '/_auth/calendar/': typeof AuthCalendarIndexRoute
+  '/_auth/infomation-provide/': typeof AuthInfomationProvideIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register' | '/calendar/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/calendar/'
+    | '/infomation-provide/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/register' | '/' | '/calendar'
+  to: '/login' | '/register' | '/' | '/calendar' | '/infomation-provide'
   id:
     | '__root__'
     | '/_auth'
@@ -72,6 +87,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/_auth/'
     | '/_auth/calendar/'
+    | '/_auth/infomation-provide/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -110,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }
+    '/_auth/infomation-provide/': {
+      id: '/_auth/infomation-provide/'
+      path: '/infomation-provide'
+      fullPath: '/infomation-provide/'
+      preLoaderRoute: typeof AuthInfomationProvideIndexRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
     '/_auth/calendar/': {
       id: '/_auth/calendar/'
       path: '/calendar'
@@ -123,11 +146,13 @@ declare module '@tanstack/react-router' {
 interface AuthRouteRouteChildren {
   AuthIndexRoute: typeof AuthIndexRoute
   AuthCalendarIndexRoute: typeof AuthCalendarIndexRoute
+  AuthInfomationProvideIndexRoute: typeof AuthInfomationProvideIndexRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
   AuthCalendarIndexRoute: AuthCalendarIndexRoute,
+  AuthInfomationProvideIndexRoute: AuthInfomationProvideIndexRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(

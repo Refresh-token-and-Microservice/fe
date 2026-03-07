@@ -1,14 +1,14 @@
 import { useCalendar } from '@/contexts/CalendarContext';
 
 import { AvatarGroup } from '@/components/ui/avatar-group';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export function UserSelect() {
-    const { users, selectedUserId, setSelectedUserId } = useCalendar();
+    const { admins, selectedUserId, setSelectedUserId } = useCalendar();
 
     return (
-        <Select value={selectedUserId} onValueChange={setSelectedUserId}>
+        <Select value={String(selectedUserId)} onValueChange={(val) => setSelectedUserId(val === 'all' ? 'all' : Number(val))}>
             <SelectTrigger className="flex-1 md:w-48">
                 <SelectValue />
             </SelectTrigger>
@@ -17,10 +17,9 @@ export function UserSelect() {
                 <SelectItem value="all">
                     <div className="flex items-center gap-1">
                         <AvatarGroup max={2}>
-                            {users.map((user) => (
-                                <Avatar key={user.id} className="size-6 text-xxs">
-                                    <AvatarImage src={user.picturePath ?? undefined} alt={user.name} />
-                                    <AvatarFallback className="text-xxs">{user.name[0]}</AvatarFallback>
+                            {admins.map((admin) => (
+                                <Avatar key={admin.id} className="size-6 text-xxs">
+                                    <AvatarFallback className="text-xxs">{admin.firstName?.[0] || 'U'}</AvatarFallback>
                                 </Avatar>
                             ))}
                         </AvatarGroup>
@@ -28,15 +27,14 @@ export function UserSelect() {
                     </div>
                 </SelectItem>
 
-                {users.map((user) => (
-                    <SelectItem key={user.id} value={user.id} className="flex-1">
+                {admins.map((admin) => (
+                    <SelectItem key={admin.id} value={String(admin.id)} className="flex-1">
                         <div className="flex items-center gap-2">
-                            <Avatar key={user.id} className="size-6">
-                                <AvatarImage src={user.picturePath ?? undefined} alt={user.name} />
-                                <AvatarFallback className="text-xxs">{user.name[0]}</AvatarFallback>
+                            <Avatar key={admin.id} className="size-6">
+                                <AvatarFallback className="text-xxs">{admin.firstName?.[0] || 'U'}</AvatarFallback>
                             </Avatar>
 
-                            <p className="truncate">{user.name}</p>
+                            <p className="truncate">{`${admin.firstName || ''} ${admin.lastName || ''}`.trim()}</p>
                         </div>
                     </SelectItem>
                 ))}

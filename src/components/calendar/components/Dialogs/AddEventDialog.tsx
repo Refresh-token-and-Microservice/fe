@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { TimeInput } from '@/components/ui/time-input';
 import { SingleDayPicker } from '@/components/ui/single-day-picker';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Form, FormField, FormLabel, FormItem, FormControl, FormMessage } from '@/components/ui/form';
 import { Select, SelectItem, SelectContent, SelectTrigger, SelectValue } from '@/components/ui/select';
 import {
@@ -37,7 +37,7 @@ interface IProps {
 }
 
 export function AddEventDialog({ children, startDate, startTime }: IProps) {
-    const { users } = useCalendar();
+    const { admins } = useCalendar();
 
     const { isOpen, onClose, onToggle } = useDisclosure();
 
@@ -88,21 +88,23 @@ export function AddEventDialog({ children, startDate, startTime }: IProps) {
                                 <FormItem>
                                     <FormLabel>Responsible</FormLabel>
                                     <FormControl>
-                                        <Select value={field.value} onValueChange={field.onChange}>
+                                        <Select
+                                            value={field.value !== undefined ? String(field.value) : undefined}
+                                            onValueChange={(val) => field.onChange(Number(val))}
+                                        >
                                             <SelectTrigger data-invalid={fieldState.invalid}>
                                                 <SelectValue placeholder="Select an option" />
                                             </SelectTrigger>
 
                                             <SelectContent>
-                                                {users.map((user) => (
-                                                    <SelectItem key={user.id} value={user.id} className="flex-1">
+                                                {admins.map((admin) => (
+                                                    <SelectItem key={admin.id} value={String(admin.id)} className="flex-1">
                                                         <div className="flex items-center gap-2">
-                                                            <Avatar key={user.id} className="size-6">
-                                                                <AvatarImage src={user.picturePath ?? undefined} alt={user.name} />
-                                                                <AvatarFallback className="text-xxs">{user.name[0]}</AvatarFallback>
+                                                            <Avatar key={admin.id} className="size-6">
+                                                                <AvatarFallback className="text-xxs">{admin.firstName?.[0] || 'U'}</AvatarFallback>
                                                             </Avatar>
 
-                                                            <p className="truncate">{user.name}</p>
+                                                            <p className="truncate">{`${admin.firstName || ''} ${admin.lastName || ''}`.trim()}</p>
                                                         </div>
                                                     </SelectItem>
                                                 ))}

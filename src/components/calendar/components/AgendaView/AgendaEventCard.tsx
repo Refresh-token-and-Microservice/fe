@@ -85,7 +85,7 @@ export function AgendaEventCard({ event, eventCurrentDay, eventTotalDays }: IPro
 
                     <div className="mt-1 flex items-center gap-1">
                         <User className="size-3 shrink-0" />
-                        <p className="text-xs text-foreground">{event.user.name}</p>
+                        <p className="text-xs text-foreground">{`${event.user.firstName || ''} ${event.user.lastName || ''}`.trim()}</p>
                     </div>
 
                     <div className="flex items-center gap-1">

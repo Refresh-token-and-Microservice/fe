@@ -10,7 +10,6 @@ export const useLogout = () => {
 
         onSuccess: () => {
             navigate({ to: '/login' });
-            localStorage.removeItem('IS_LOGIN');
         },
 
         onError: (error: Error) => {

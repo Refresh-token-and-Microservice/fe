@@ -1,10 +1,5 @@
 import type { EventColor } from '@/types/calendarEnums';
-
-export interface User {
-    id: string;
-    name: string;
-    picturePath: string | null;
-}
+import type { GetAllAdminItem } from './userInterfaces';
 
 export interface Event {
     id: number;
@@ -13,7 +8,7 @@ export interface Event {
     title: string;
     color: EventColor;
     description: string;
-    user: User;
+    user: GetAllAdminItem;
 }
 
 export interface CalendarCell {

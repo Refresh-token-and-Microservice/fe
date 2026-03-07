@@ -18,12 +18,12 @@ declare module '@tanstack/react-router' {
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <UserProvider>
-            <CalendarProvider>
-                <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+            <UserProvider>
+                <CalendarProvider>
                     <RouterProvider router={router} />
-                </QueryClientProvider>
-            </CalendarProvider>
-        </UserProvider>
+                </CalendarProvider>
+            </UserProvider>
+        </QueryClientProvider>
     </StrictMode>,
 );

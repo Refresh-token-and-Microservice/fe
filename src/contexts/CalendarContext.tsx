@@ -1,19 +1,21 @@
 import { createContext, useContext } from 'react';
 
 import type { Dispatch, SetStateAction } from 'react';
-import type { Event, User } from '@/interfaces/calendarInterfaces';
+import type { Event } from '@/interfaces/calendarInterfaces';
 import type { BadgeVariant, CalendarView, VisibleHours, WorkingHours } from '@/types/calendarEnums';
+import type { GetAllAdminItem } from '@/interfaces/userInterfaces';
 
 interface ICalendarContext {
     selectedView: CalendarView;
     setSelectedView: (view: CalendarView) => void;
     selectedDate: Date;
     setSelectedDate: (date: Date | undefined) => void;
-    selectedUserId: User['id'] | 'all';
-    setSelectedUserId: (userId: User['id'] | 'all') => void;
+    selectedUserId: GetAllAdminItem['id'] | 'all';
+    setSelectedUserId: (userId: GetAllAdminItem['id'] | 'all') => void;
     badgeVariant: BadgeVariant;
     setBadgeVariant: (variant: BadgeVariant) => void;
-    users: User[];
+    admins: GetAllAdminItem[];
+    setAdmins: Dispatch<SetStateAction<GetAllAdminItem[]>>;
     workingHours: WorkingHours;
     seWorkingHours: Dispatch<SetStateAction<WorkingHours>>;
     visibleHours: VisibleHours;

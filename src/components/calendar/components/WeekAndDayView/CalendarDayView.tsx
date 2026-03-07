@@ -23,7 +23,7 @@ interface IProps {
 }
 
 export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
-    const { selectedDate, setSelectedDate, users, visibleHours, workingHours } = useCalendar();
+    const { selectedDate, setSelectedDate, admins, visibleHours, workingHours } = useCalendar();
 
     const { hours, earliestEventHour, latestEventHour } = geVisibleHours(visibleHours, singleDayEvents);
 
@@ -170,16 +170,16 @@ export function CalendarDayView({ singleDayEvents, multiDayEvents }: IProps) {
                         <ScrollArea className="h-[422px] px-4" type="always">
                             <div className="space-y-6 pb-4">
                                 {currentEvents.map((event) => {
-                                    const user = users.find((user) => user.id === event.user.id);
+                                    const admin = admins.find((admin) => admin.id === event.user.id);
 
                                     return (
                                         <div key={event.id} className="space-y-1.5">
                                             <p className="line-clamp-2 text-sm font-semibold">{event.title}</p>
 
-                                            {user && (
+                                            {admin && (
                                                 <div className="flex items-center gap-1.5 text-muted-foreground">
                                                     <User className="size-3.5" />
-                                                    <span className="text-sm">{user.name}</span>
+                                                    <span className="text-sm">{`${admin.firstName || ''} ${admin.lastName || ''}`.trim()}</span>
                                                 </div>
                                             )}
 

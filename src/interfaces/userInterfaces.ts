@@ -5,7 +5,20 @@ export interface UserProfileResponse {
     status: string;
     disabled: boolean;
     disableAt: string;
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
+    phone: string;
+}
+
+export interface GetAllAdminItem {
+    id: number;
+    email: string;
+    firstName: string;
+    lastName: string;
+}
+
+export interface UpdateUserRequest {
+    firstName: string;
+    lastName: string;
     phone: string;
 }
